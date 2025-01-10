@@ -5,8 +5,6 @@ import {
   NavbarToggler,
   Collapse,
   Nav,
-  NavItem,
-  NavLink,
   Button,
   Input,
   Dropdown,
@@ -29,6 +27,13 @@ export default function NavbarComponent () {
   })
 
   const toggleNavbar = () => setIsOpen(!isOpen)
+
+  const toggleDropdown = menu => {
+    setDropdownOpen(prevState => ({
+      ...prevState,
+      [menu]: !prevState[menu]
+    }))
+  }
 
   const handleMouseEnter = menu => {
     setDropdownOpen(prevState => ({
@@ -65,6 +70,39 @@ export default function NavbarComponent () {
     'SaaS',
     'Job Listing'
   ]
+  const dropdownItems3 = [
+    'Courses',
+    'Paths',
+    'Blog',
+    'Career',
+    'Portolio',
+    'Mentor',
+    'Job',
+    'Specialty',
+    <hr />,
+    'About',
+    'Help Center',
+    'Pricing',
+    'Compare Plan',
+    'Contact'
+  ]
+
+  const dropdownItems4 = [
+    'Instructor',
+    'Students',
+    'Admin',
+    <hr />,
+    'Sign in',
+    'Sing up',
+    'Forgot Password',
+    'Edit Profile',
+    'Security',
+    'Social Profiles',
+    'Notifications',
+    'Privacy Settings',
+    'Delete Profile',
+    'Linked Accounts'
+  ]
 
   return (
     <Navbar
@@ -93,7 +131,7 @@ export default function NavbarComponent () {
                 key={menu.toLowerCase()}
                 nav
                 isOpen={dropdownOpen[menu.toLowerCase()]}
-                toggle={() => {}} // Toggle funksiyasi kerak emas
+                toggle={() => toggleDropdown(menu.toLowerCase())}
                 onMouseEnter={() => handleMouseEnter(menu.toLowerCase())}
                 onMouseLeave={() => handleMouseLeave(menu.toLowerCase())}
               >
@@ -106,9 +144,23 @@ export default function NavbarComponent () {
                   <ChevronDown className='ms-1 w-25' />
                 </DropdownToggle>
                 <DropdownMenu className='mt-5'>
-                  {dropdownItems.map((item, idx) => (
-                    <DropdownItem key={idx}>{item}</DropdownItem>
-                  ))}
+                  {/* <span className='text-black-50 ms-3'>Accounts</span> */}
+
+                  {menu === 'Landings'
+                    ? dropdownItems2.map((item, idx) => (
+                        <DropdownItem key={idx}>{item}</DropdownItem>
+                      ))
+                    : menu === 'Pages'
+                    ? dropdownItems3.map((item, idx) => (
+                        <DropdownItem key={idx}>{item}</DropdownItem>
+                      ))
+                    : menu === 'Accounts'
+                    ? dropdownItems4.map((item, idx) => (
+                        <DropdownItem key={idx}>{item}</DropdownItem>
+                      ))
+                    : dropdownItems.map((item, idx) => (
+                        <DropdownItem key={idx}>{item}</DropdownItem>
+                      ))}
                 </DropdownMenu>
               </Dropdown>
             ))}
