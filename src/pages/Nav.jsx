@@ -8,7 +8,11 @@ import {
   NavItem,
   NavLink,
   Button,
-  Input
+  Input,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
 } from 'reactstrap'
 import { ChevronDown, Menu, Moon, Search } from 'lucide-react'
 import Logo from '../images/logo.svg'
@@ -17,8 +21,50 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 export default function NavbarComponent () {
   const [isDark, setIsDark] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState({
+    browse: false,
+    landings: false,
+    pages: false,
+    accounts: false
+  })
 
   const toggleNavbar = () => setIsOpen(!isOpen)
+
+  const handleMouseEnter = menu => {
+    setDropdownOpen(prevState => ({
+      ...prevState,
+      [menu]: true
+    }))
+  }
+
+  const handleMouseLeave = menu => {
+    setDropdownOpen(prevState => ({
+      ...prevState,
+      [menu]: false
+    }))
+  }
+
+  const dropdownItems = [
+    'Web Development',
+    'Design',
+    'Mobile App',
+    'IT Software',
+    'Marketing',
+    'Music',
+    'Life Style',
+    'Business',
+    'Photography'
+  ]
+  const dropdownItems2 = [
+    'Mentor',
+    'Education',
+    'Home Academy',
+    'Courses',
+    'Lead Course',
+    'Request Accesss',
+    'SaaS',
+    'Job Listing'
+  ]
 
   return (
     <Navbar
@@ -28,12 +74,13 @@ export default function NavbarComponent () {
       }}
       light
       expand='md'
-      className=''
-      >
+    >
       <img className='' src={Logo} alt='Logo' />
       <div className='container'>
-        <NavbarBrand href='/' className='d-flex align-items-center'>
-        </NavbarBrand>
+        <NavbarBrand
+          href='/'
+          className='d-flex align-items-center'
+        ></NavbarBrand>
 
         <NavbarToggler onClick={toggleNavbar}>
           <Menu className='w-5 h-5' />
@@ -41,30 +88,30 @@ export default function NavbarComponent () {
 
         <Collapse isOpen={isOpen} navbar>
           <Nav className='me-auto' navbar>
-            <NavItem>
-              <NavLink href='#' className='d-flex align-items-center'>
-                Browse
-                <ChevronDown className='ms-1 w-25' />
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href='#' className='d-flex align-items-center'>
-                Landings
-                <ChevronDown className='ms-1 w-25' />
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href='#' className='d-flex align-items-center'>
-                Pages
-                <ChevronDown className='ms-1 w-25' />
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href='#' className='d-flex align-items-center'>
-                Accounts
-                <ChevronDown className='ms-1 w-25' />
-              </NavLink>
-            </NavItem>
+            {['Browse', 'Landings', 'Pages', 'Accounts'].map(menu => (
+              <Dropdown
+                key={menu.toLowerCase()}
+                nav
+                isOpen={dropdownOpen[menu.toLowerCase()]}
+                toggle={() => {}} // Toggle funksiyasi kerak emas
+                onMouseEnter={() => handleMouseEnter(menu.toLowerCase())}
+                onMouseLeave={() => handleMouseLeave(menu.toLowerCase())}
+              >
+                <DropdownToggle
+                  nav
+                  className='d-flex align-items-center'
+                  style={{ fontWeight: '500', color: '#18113c' }}
+                >
+                  {menu}
+                  <ChevronDown className='ms-1 w-25' />
+                </DropdownToggle>
+                <DropdownMenu className='mt-5'>
+                  {dropdownItems.map((item, idx) => (
+                    <DropdownItem key={idx}>{item}</DropdownItem>
+                  ))}
+                </DropdownMenu>
+              </Dropdown>
+            ))}
             <div className='d-md-flex position-relative me-3'>
               <Search
                 style={{ width: '18px', height: '18px' }}
