@@ -11,6 +11,7 @@ import {
   Input
 } from 'reactstrap'
 import { ChevronDown, Menu, Moon, Search } from 'lucide-react'
+import Logo from '../images/logo.svg'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default function NavbarComponent () {
@@ -28,15 +29,10 @@ export default function NavbarComponent () {
       light
       expand='md'
       className=''
-    >
+      >
+      <img className='' src={Logo} alt='Logo' />
       <div className='container'>
         <NavbarBrand href='/' className='d-flex align-items-center'>
-          {/* <div
-            className='bg-primary rounded-lg'
-            style={{ width: '32px', height: '32px' }}
-            ></div> */}
-          <img src='../images/logo.svg' alt='Logo' />
-          <span className='ms-2 fs-4 fw-bold'>Geeks</span>
         </NavbarBrand>
 
         <NavbarToggler onClick={toggleNavbar}>
@@ -84,17 +80,17 @@ export default function NavbarComponent () {
           <Nav navbar>
             <Button
               color='link'
-              className='p-2 text-dark'
+              className='p-2 text-black-50 me-3'
               onClick={() => setIsDark(!isDark)}
             >
               <Moon className='w-5 h-5' />
             </Button>
 
-            <div className='d-none d-md-flex align-items-center gap-2'>
+            <div className='d-none d-md-flex align-items-center gap-3'>
               <Button
                 style={{
                   fontFamily: 'initial',
-                  boxShadow: 'none',
+                  boxShadow: '1px 2px 2px 1px rgba(0, 0, 0, 0.1)',
                   color: 'black',
                   backgroundColor: 'white',
                   border: 'none'
