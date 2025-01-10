@@ -1,9 +1,9 @@
 import React from 'react'
-
+import Nav from './pages/Nav'
 const App = () => {
   return (
     <div>
-      <h1>App</h1>
+      <Nav />
     </div>
   )
 }
