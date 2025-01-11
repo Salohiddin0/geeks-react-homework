@@ -15,9 +15,26 @@ import { LuUsers } from 'react-icons/lu'
 import { IoIosCheckmarkCircleOutline } from 'react-icons/io'
 import { IoLogoGoogle } from 'react-icons/io'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { TiTick } from 'react-icons/ti'
+import styled from 'styled-components'
 // import Bgsvg from '../images/bg.svg'
 
 const About = () => {
+  const Componies = [
+    {
+      name: 'Shareable Certificate'
+    },
+    {
+      name: 'Flexible Deadlines'
+    },
+    {
+      name: '100% Online Courses'
+    },
+    {
+      name: 'Shareable Certificate'
+    }
+  ]
+
   return (
     <Container className='my-5'>
       <Row className='align-items-center'>
@@ -137,7 +154,7 @@ const About = () => {
                 className='flex-fill me-2'
               >
                 <svg
-                style={{ marginRight: '5px' }}
+                  style={{ marginRight: '5px' }}
                   xmlns='http://www.w3.org/2000/svg'
                   x='0px'
                   y='0px'
@@ -216,8 +233,29 @@ const About = () => {
           </div>
         </Col>
       </Row>
+      <Footer>
+        <ul className='list-unstyled d-flex justify-content-between'>
+          {Componies.map(c => {
+            return (
+              <li className='d-flex align-items-center gap-2'>
+                <GoldTag>
+                  <TiTick />
+                </GoldTag>
+                {c.name}
+              </li>
+            )
+          })}
+        </ul>
+      </Footer>
     </Container>
   )
 }
+
+const GoldTag = styled.span`
+  color: gold;
+`
+const Footer = styled.footer`
+  padding: 150px 0 10px 0;
+`
 
 export default About
